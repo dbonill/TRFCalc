@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>TRF Calc</title>
+</head>
+<body>
+    <div>
+        <p>TRF Calulator</p>
+        Enter Prework Value: <input type="text" id="prework"> / 10
+
+        <p id="total">Total: 0/25</p>
+        <p id="percentage">Percentage: 0%</p>
+        <h3>Common Prework Grades</h3>
+        <div class="grid-container" id="commonTable">
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("prework").onchange = function () { myFunction() };
+
+        var a = document.getElementById("commonTable");
+        for (let i = 10; i >= 0; i--)
+        {
+            var newTotal = i + 15;
+            var newPercentage = newTotal * 4;
+            var tempS = "grid-item"
+            var p1 = "<div class=" + tempS + ">Prework: " + i + "/10</div>";
+            var p2 = "<div class=" + tempS + ">Total: " + newTotal + "/25</div>";
+            var p3 = "<div class=" + tempS + ">Percentage: " + newPercentage + "%</div>"; 
+            var s = p1 + p2 + p3;
+            a.innerHTML += s;
+        }
+
+        function myFunction() {
+            var x = document.getElementById("prework").value;
+            var y = document.getElementById("total");
+            var z = document.getElementById("percentage");
+
+            var floatValue = parseFloat(x)
+            var newTotal = floatValue + 15;
+            var newPercentage = newTotal * 4;
+            console.log(x.textContent);
+            y.textContent = "Total: " + newTotal + "/25";
+            z.textContent = "Percentage: " + newPercentage + "%";
+        }
+    </script>
+
+</body>
+</html>
