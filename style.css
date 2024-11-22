@@ -12,7 +12,7 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    align-items: center
+    align-items: center;
 }
 
 .grid-container {
