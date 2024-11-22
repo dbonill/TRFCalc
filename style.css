@@ -8,6 +8,13 @@ input {
     width: 10%;
 }
 
+#enterValue {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;

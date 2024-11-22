@@ -9,45 +9,93 @@
 </head>
 <body>
     <div>
-        <p>TRF Calculator</p>
-        Enter Prework Value: <input type="number" id="prework"> / 10
+        <div>
+            <p id="TRFtitle">TRF Calculator - Prework to Percent</p>
+            <button id="swapbutton" type="button" onclick="SwapCalulatorFunction()">Swap To Total</button>
+        </div>
+
+        <div id="enterValue">
+            <p id="valueText">Enter Prework Value: </p><input type="number" id="prework"><p id="valueText2"> / 10</p>
+        </div>
 
         <p id="total">Total: 0/25</p>
         <p id="percentage">Percentage: 0%</p>
-        <h3>Common Prework Grades</h3>
-        <div class="grid-container" id="commonTable">
 
+        <h3>Common Grades</h3>
+        <div class="grid-container" id="commonTable">
         </div>
 
     </div>
 
     <script>
-        document.getElementById("prework").onchange = function () { myFunction() };
-
+        document.getElementById("prework").onchange = function () { CalculateGrades() };
+        var isTotal = false;
         var a = document.getElementById("commonTable");
+        var enterVal = document.getElementById("enterValue");
+        var valueText1 = document.getElementById("valueText");
+        var valueText2 = document.getElementById("valueText2");
+        var tempS = "grid-item";
+        var header = "<div class=" + tempS + ">Prework</div>" + "<div class=" + tempS + ">Total</div>" + "<div class=" + tempS + ">Percentage</div>";
+        a.innerHTML += header;
         for (let i = 10; i >= 0; i--)
         {
             var newTotal = i + 15;
             var newPercentage = newTotal * 4;
-            var tempS = "grid-item"
-            var p1 = "<div class=" + tempS + ">Prework: " + i + "/10</div>";
-            var p2 = "<div class=" + tempS + ">Total: " + newTotal + "/25</div>";
-            var p3 = "<div class=" + tempS + ">Percentage: " + newPercentage + "%</div>"; 
+            var tempS = "grid-item";
+            var p1 = "<div class=" + tempS + ">" + i + "/10</div>";
+            var p2 = "<div class=" + tempS + ">" + newTotal + "/25</div>";
+            var p3 = "<div class=" + tempS + ">" + newPercentage + "%</div>"; 
             var s = p1 + p2 + p3;
             a.innerHTML += s;
         }
 
-        function myFunction() {
+        function CalculateGrades() {
             var x = document.getElementById("prework").value;
             var y = document.getElementById("total");
             var z = document.getElementById("percentage");
 
-            var floatValue = parseFloat(x)
+            var floatValue = parseFloat(x);
             var newTotal = floatValue + 15;
             var newPercentage = newTotal * 4;
-            console.log(x.textContent);
-            y.textContent = "Total: " + newTotal + "/25";
-            z.textContent = "Percentage: " + newPercentage + "%";
+
+            if (isTotal) {
+                newTotal = floatValue - 15;
+                if (newTotal < 0) {
+                    newTotal = 0;
+                }
+                newPercentage = floatValue * 4;
+                y.textContent = "Prework: " + newTotal + "/10";
+                z.textContent = "Percentage: " + newPercentage + "%";
+            }
+            else {
+                y.textContent = "Total: " + newTotal + "/25";
+                z.textContent = "Percentage: " + newPercentage + "%";
+            }
+        }
+
+        function SwapCalulatorFunction() {
+            var title = document.getElementById("TRFtitle");
+            var button = document.getElementById("swapbutton");
+            var y = document.getElementById("total");
+            var z = document.getElementById("percentage");
+            document.getElementById("prework").value = "";
+            isTotal = !isTotal;
+            if (isTotal) {
+                title.textContent = "TRF Calculator - Total to Percent";
+                button.textContent = "Swap To Prework";
+                valueText1.textContent = "Enter Total Value: "; 
+                valueText2.textContent = " / 25";
+                y.textContent = "Prework: 0/10";
+                z.textContent = "Percentage: 0%";
+            }
+            else {
+                title.textContent = "TRF Calculator - Prework to Percent";
+                button.textContent = "Swap To Total";
+                valueText1.textContent = "Enter Prework Value: ";
+                valueText2.textContent = " / 10";
+                y.textContent = "Total: 0/25";
+                z.textContent = "Percentage: 0%";
+            }
         }
     </script>
 
