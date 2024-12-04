@@ -6,9 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>TRF Calc</title>
+    <style>
+        .borderDiv {
+            border: 5px outset black;
+            background-color: lightblue;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
     <div>
+        <div class="borderDiv">
+            <p>Updated 12/4/2024</p>
+            <p>Prework in table assumes perfect scores in other categories.</p>
+            <p>Formula for percent is (Total Score) x 4.</p>
+            <p>Press [Swap To Total] to calculate total to percent.</p>
+        </div>
         <div>
             <p id="TRFtitle">TRF Calculator - Prework to Percent</p>
             <button id="swapbutton" type="button" onclick="SwapCalulatorFunction()">Swap To Total</button>
@@ -17,9 +31,10 @@
         <div id="enterValue">
             <p id="valueText">Enter Prework Value: </p><input type="number" id="prework"><p id="valueText2"> / 10</p>
         </div>
-
-        <p id="total">Total: 0/25</p>
-        <p id="percentage">Percentage: 0%</p>
+        <div>
+            <p id="total">Total: 0/25</p>
+            <p id="percentage">Percentage: 0%</p>
+        </div>
 
         <h3>Common Grades</h3>
         <div class="grid-container" id="commonTable">
@@ -48,6 +63,17 @@
             var s = p1 + p2 + p3;
             a.innerHTML += s;
         }
+        for (let i = 14; i >= 0; i--)
+        {
+            var newTotal = i;
+            var newPercentage = newTotal * 4;
+            var tempS = "grid-item";
+            var p1 = "<div class=" + tempS + ">" + "0" + "/10</div>";
+            var p2 = "<div class=" + tempS + ">" + newTotal + "/25</div>";
+            var p3 = "<div class=" + tempS + ">" + newPercentage + "%</div>";
+            var s = p1 + p2 + p3;
+            a.innerHTML += s;
+        }
 
         function CalculateGrades() {
             var x = document.getElementById("prework").value;
@@ -64,7 +90,7 @@
                     newTotal = 0;
                 }
                 newPercentage = floatValue * 4;
-                y.textContent = "Prework: " + newTotal + "/10";
+                //y.textContent = "Prework: " + newTotal + "/10";
                 z.textContent = "Percentage: " + newPercentage + "%";
             }
             else {
@@ -85,7 +111,7 @@
                 button.textContent = "Swap To Prework";
                 valueText1.textContent = "Enter Total Value: "; 
                 valueText2.textContent = " / 25";
-                y.textContent = "Prework: 0/10";
+                y.textContent = ""// "Prework: 0/10";
                 z.textContent = "Percentage: 0%";
             }
             else {
